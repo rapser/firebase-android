@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Firebase</string>
+    <string name="prefs_file">com.rapser.firebaseandroid.PREFERENCE.FILE.KEY</string>
+
+</resources>
