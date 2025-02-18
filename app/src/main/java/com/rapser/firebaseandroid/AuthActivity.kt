@@ -6,11 +6,14 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.auth.FirebaseAuth
 
 class AuthActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        val splashScreen = installSplashScreen()
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_auth)
@@ -25,7 +28,7 @@ class AuthActivity : AppCompatActivity() {
         setup()
     }
 
-    fun setup() {
+    private fun setup() {
         title = "Autenticación"
 
         val signUpButton: Button = findViewById(R.id.signupButton)
@@ -62,7 +65,7 @@ class AuthActivity : AppCompatActivity() {
 
     }
 
-    fun showAlert() {
+    private fun showAlert() {
         val builder = AlertDialog.Builder(this)
         builder.setTitle("Error")
         builder.setMessage("Se ha producido un error autenticando al usuario")
