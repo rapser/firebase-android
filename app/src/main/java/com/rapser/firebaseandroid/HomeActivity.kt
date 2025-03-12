@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
 import com.google.firebase.auth.FirebaseAuth
+import androidx.core.content.edit
 
 enum class ProviderType {
     BASIC,
@@ -28,10 +29,10 @@ class HomeActivity : AppCompatActivity() {
         setup(email, provider)
 
         // 4️⃣ Guardar datos en SharedPreferences
-        val prefs = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE).edit()
-        prefs.putString("email", email)
-        prefs.putString("provider", provider)
-        prefs.apply()
+        getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE).edit {
+            putString("email", email)
+            putString("provider", provider)
+        }
     }
 
     private fun setup(email: String, provider: String){
@@ -45,9 +46,9 @@ class HomeActivity : AppCompatActivity() {
         providerTextView.text = provider
 
         logoutButton.setOnClickListener {
-            val prefs = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE).edit()
-            prefs.clear()
-            prefs.apply()
+            getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE).edit {
+                clear()
+            }
             FirebaseAuth.getInstance().signOut()
             onBackPressed()
         }
